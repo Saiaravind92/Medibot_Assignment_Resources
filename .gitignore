@@ -1,0 +1,50 @@
+# ==========================================
+# MediBot - Git Ignore Specification
+# ==========================================
+
+# Environment Variables & Secrets
+.env
+*.env
+backend/.env
+
+# Python Virtual Environments & Caches
+.venv/
+venv/
+ENV/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+
+# Node.js & Next.js Build Outputs & Dependencies
+node_modules/
+frontend/node_modules/
+.next/
+frontend/.next/
+out/
+build/
+dist/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Standalone Executables & Large Binaries
+node_64.exe
+*.exe
+*.dll
+
+# Local Vector Database Engine (Qdrant storage)
+backend/qdrant_db/
+
+# Operating System & IDE Specific Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo

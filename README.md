@@ -86,37 +86,6 @@ graph TB
     Groq -->|Synthesized Answer + Citations| RespView
 ```
 
-### Query Flow Diagram
-
-```mermaid
-flowchart TD
-    User["User Interface (Next.js)"]
-    API["FastAPI Backend (/chat)"]
-    RBAC["RBAC Filter (Retrieval Layer)"]
-    Qdrant["Qdrant DB (Dense + Sparse)"]
-    Rerank["Cross-Encoder Rerank"]
-    SQLite["SQLite DB (mediassist.db)"]
-    LLM["Groq LLM (Llama 3.3)"]
-
-    User -->|Chat Request + Role| API
-    API -->|Intent Routing| Route{"Is Query Analytical?"}
-    
-    Route -- "No (Document Query)" --> RBAC
-    RBAC -->|Apply access_roles Filter| Qdrant
-    Qdrant -->|Prefetch Dense + Sparse (RRF)| Rerank
-    Rerank -->|Top 6 Reranked Chunks| LLM
-    LLM -->|Synthesize Response| API
-    
-    Route -- "Yes (Analytical Query)" --> CheckRole{"Is Role Admin/Billing?"}
-    CheckRole -- "Yes" --> SQLite
-    SQLite -->|Raw Rows| LLM
-    CheckRole -- "No" --> Block["Refusal Response"]
-    
-    API -->|Response + Citations + RAG Type| User
-```
-
----
-
 ## 📂 Project Structure
 
 ```
